@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- BootstrapのCSS読み込み -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container" style="height:5vh;">
+        hello world
+    </div>
+    <div class="container-fluid" style="height:95vh;">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a href="#tab1" class="nav-link active" data-toggle="tab">タブ１</a>
+            </li>
+            <li class="nav-item">
+              <a href="#tab2" class="nav-link" data-toggle="tab">タブ2</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active" style="height:95vh;">
+                <div class="row">
+                    <div class="col-6" style="height:95vh;">
+                        <iframe src="pdfjs-2.7.570-dist/web/viewer.html?file=chelsea.pdf" id="pdf1" type="application/pdf" width="100%" height="100%"></iframe>
+                    </div>
+                    <div class="col-6" style="height:95vh;">
+                        <iframe src="pdfjs-2.7.570-dist/web/viewer.html?file=chelsea.pdf" id="pdf2" type="application/pdf" width="100%" height="100%"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div id="tab2" class="tab-pane height:95vh;">
+                <iframe src="pdfjs-2.7.570-dist/web/viewer.html?file=chelsea.pdf" type="application/pdf" width="100%" height="100%"></iframe>
+            </div>
+        </div>
+    </div>
+        
+</body>
+</html>
+
+
+<script >
+$("#pdf1").on('load', function(){
+    $("#pdf1").contents().find("#viewerContainer").on('scroll', function(){
+        $("#pdf2").contents().find("#viewerContainer").scrollTop($(this).scrollTop());
+    });
+});
+
+$("#pdf2").on('load', function(){
+    $("#pdf2").contents().find("#viewerContainer").on('scroll', function(){
+            $("#pdf1").contents().find("#viewerContainer").scrollTop($(this).scrollTop());
+    });
+});
+</script>
